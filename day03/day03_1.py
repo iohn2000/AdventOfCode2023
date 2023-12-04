@@ -1,17 +1,11 @@
 partSum = 0
-
 def isSymbol(c):
-    if (not c.isnumeric()) and (c != ".") and c != '\n':
-        return True
-    else:
-        return False
+    if (not c.isnumeric()) and (c != ".") and c != '\n': return True
+    else: return False
     
 def searchLine(l1, l2, l3):
     global partSum
-    onRun = 0
-    startIdx = 0
-    endIdx = 0
-    currentNr = ""
+    onRun = 0; startIdx = 0; endIdx = 0; currentNr = ""
     for idx in range(len(l2)):
         element = l2[idx]
         if element.isnumeric() == True:
@@ -24,9 +18,7 @@ def searchLine(l1, l2, l3):
         else:
             if onRun == 1:
                 # runs ends
-                endIdx = idx-1
-                isPartNr = False
-                # check if is partnr
+                endIdx = idx-1; isPartNr = False
                 #above left, right diagonal
                 if l1 != "":
                     isPartNr = isSymbol (l1[startIdx-1]) | isSymbol (l1[endIdx+1])
@@ -41,41 +33,17 @@ def searchLine(l1, l2, l3):
                         isPartNr = isPartNr | isSymbol(l1[partIx])
                     if l3 != "":
                         isPartNr = isPartNr | isSymbol(l3[partIx])
-                if isPartNr == True:
-                    partSum = partSum + int(currentNr)
-                    print (str(currentNr) + ' -> ' + str(partSum))
-                    print (l1[startIdx-2:endIdx+3])
-                    print (l2[startIdx-2:endIdx+3])
-                    print (l3[startIdx-2:endIdx+3])
-                    print ("-----------")
+                if isPartNr == True: partSum = partSum + int(currentNr)
             onRun = 0
-
-
-print ('hello world')
-print (partSum)
-# strategie
-# always have currentline plus prev. next row to find diagonales
+# START
 fh = open("input.txt")
-line1 = fh.readline()
-line2 = fh.readline()
-line3 = fh.readline()
-
-# search first line & second line
-searchLine ("",line1,line2)
-searchLine (line1,line2,line3)
-
-#search lines 2+
+line1 = fh.readline();line2 = fh.readline();line3 = fh.readline()
+searchLine ("",line1,line2); searchLine (line1,line2,line3)
 while True:
-    # move current line (line2) and get new line
     line1 = line2
     line2 = line3
     line3 = fh.readline()
     searchLine (line1,line2,line3)
-    if not line3:
-        break
-
-# search last line
+    if not line3: break
 searchLine (line2, line3, "")
-print (partSum)
-fh.close()
-
+print (partSum); fh.close()
