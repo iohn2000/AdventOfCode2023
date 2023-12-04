@@ -12,14 +12,12 @@ def searchForStarGear(l):
     starNrList = []
     for idx in range(len(l[1])):
         if l[1][idx] == "*":
-            uniqueListAbove = []; uniqueListBelow = []
-            uniqueListSame = list(set([getNr(l[1],idx-1),getNr(l[1],idx+1)]))
-            if l[0] != "":
-                uniqueListAbove = list(set([getNr(l[0],idx-1),getNr(l[0],idx),getNr(l[0],idx+1)]))
-            if l[2] != "":
-                uniqueListBelow = list(set([getNr(l[2],idx-1),getNr(l[2],idx),getNr(l[2],idx+1)]))
-            uniqueList = list(set(uniqueListAbove+uniqueListBelow+uniqueListSame))
+            setSameLine = set([getNr(l[1],idx-1),getNr(l[1],idx+1)])
+            if l[0] != "": setAbove = set([getNr(l[0],idx-1),getNr(l[0],idx),getNr(l[0],idx+1)])
+            if l[2] != "": setBelow = set([getNr(l[2],idx-1),getNr(l[2],idx),getNr(l[2],idx+1)])
+            uniqueList = setAbove|setBelow|setSameLine
             uniqueList.remove('')
+            uniqueList = list(uniqueList)
             if len(uniqueList) == 2:
                 gearSum = gearSum + (int(uniqueList[0]) * int(uniqueList[1]))
 # START    
