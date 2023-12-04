@@ -29,10 +29,8 @@ def searchLine(l1, l2, l3):
                 isPartNr = isPartNr | isSymbol(l2[startIdx-1]) | isSymbol(l2[endIdx+1])
                 #straight above and below                    
                 for partIx in range(startIdx,endIdx+1):
-                    if l1 != "":
-                        isPartNr = isPartNr | isSymbol(l1[partIx])
-                    if l3 != "":
-                        isPartNr = isPartNr | isSymbol(l3[partIx])
+                    if l1 != "": isPartNr = isPartNr | isSymbol(l1[partIx])
+                    if l3 != "": isPartNr = isPartNr | isSymbol(l3[partIx])
                 if isPartNr == True: partSum = partSum + int(currentNr)
             onRun = 0
 # START
