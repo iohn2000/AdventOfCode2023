@@ -9,22 +9,18 @@ def searchLine(l1, l2, l3):
     for idx in range(len(l2)):
         element = l2[idx]
         if element.isnumeric() == True:
-            if onRun == 0:
-                #run starts
+            if onRun == 0: #run starts
                 startIdx = idx
                 currentNr = ""
             currentNr += l2[idx]    
             onRun = 1
         else:
-            if onRun == 1:
-                # runs ends
+            if onRun == 1: # runs ends
                 endIdx = idx-1; isPartNr = False
                 #above left, right diagonal
-                if l1 != "":
-                    isPartNr = isSymbol (l1[startIdx-1]) | isSymbol (l1[endIdx+1])
+                if l1 != "": isPartNr = isSymbol (l1[startIdx-1]) | isSymbol (l1[endIdx+1])
                 #below left,right diagonal
-                if l3 != "":
-                    isPartNr = isPartNr | isSymbol (l3[startIdx-1]) | isSymbol (l3[endIdx+1])
+                if l3 != "": isPartNr = isPartNr | isSymbol (l3[startIdx-1]) | isSymbol (l3[endIdx+1])
                 #before and after same line
                 isPartNr = isPartNr | isSymbol(l2[startIdx-1]) | isSymbol(l2[endIdx+1])
                 #straight above and below                    
